@@ -31,11 +31,11 @@ namespace WindowsFormsApp1
         {
             this.btn_SixRan = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.button16 = new System.Windows.Forms.Button();
+            this.btn_clear = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txt_keyin = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.btn_bin = new System.Windows.Forms.Button();
+            this.btn_binary = new System.Windows.Forms.Button();
             this.btn_Cc = new System.Windows.Forms.Button();
             this.btn_LongestName = new System.Windows.Forms.Button();
             this.lblResult = new System.Windows.Forms.Label();
@@ -46,9 +46,9 @@ namespace WindowsFormsApp1
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_step = new System.Windows.Forms.TextBox();
+            this.txt_to = new System.Windows.Forms.TextBox();
+            this.txt_from = new System.Windows.Forms.TextBox();
             this.btn_OddAndEven = new System.Windows.Forms.Button();
             this.btn_MaxAndMin = new System.Windows.Forms.Button();
             this.btn_params = new System.Windows.Forms.Button();
@@ -65,6 +65,7 @@ namespace WindowsFormsApp1
             this.btn_SixRan.TabIndex = 104;
             this.btn_SixRan.Text = "int[] 樂透 6個號碼不重複";
             this.btn_SixRan.UseVisualStyleBackColor = true;
+            this.btn_SixRan.Click += new System.EventHandler(this.btn_SixRan_Click);
             // 
             // label7
             // 
@@ -77,14 +78,15 @@ namespace WindowsFormsApp1
             this.label7.TabIndex = 101;
             this.label7.Text = "Result:";
             // 
-            // button16
+            // btn_clear
             // 
-            this.button16.Location = new System.Drawing.Point(39, 314);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(105, 33);
-            this.button16.TabIndex = 100;
-            this.button16.Text = "清空結果欄";
-            this.button16.UseVisualStyleBackColor = true;
+            this.btn_clear.Location = new System.Drawing.Point(39, 314);
+            this.btn_clear.Name = "btn_clear";
+            this.btn_clear.Size = new System.Drawing.Size(105, 33);
+            this.btn_clear.TabIndex = 100;
+            this.btn_clear.Text = "清空結果欄";
+            this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
             // label5
             // 
@@ -116,16 +118,16 @@ namespace WindowsFormsApp1
             this.label6.TabIndex = 97;
             this.label6.Text = "Number:";
             // 
-            // btn_bin
+            // btn_binary
             // 
-            this.btn_bin.Location = new System.Drawing.Point(523, 77);
-            this.btn_bin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_bin.Name = "btn_bin";
-            this.btn_bin.Size = new System.Drawing.Size(156, 28);
-            this.btn_bin.TabIndex = 96;
-            this.btn_bin.Text = "100 的 二進位是多少 ?";
-            this.btn_bin.UseVisualStyleBackColor = true;
-            this.btn_bin.Click += new System.EventHandler(this.btn_bin_Click);
+            this.btn_binary.Location = new System.Drawing.Point(523, 77);
+            this.btn_binary.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_binary.Name = "btn_binary";
+            this.btn_binary.Size = new System.Drawing.Size(156, 28);
+            this.btn_binary.TabIndex = 96;
+            this.btn_binary.Text = "100 的 二進位是多少 ?";
+            this.btn_binary.UseVisualStyleBackColor = true;
+            this.btn_binary.Click += new System.EventHandler(this.btn_binary_Click);
             // 
             // btn_Cc
             // 
@@ -240,32 +242,32 @@ namespace WindowsFormsApp1
             this.label1.TabIndex = 86;
             this.label1.Text = "from:";
             // 
-            // textBox3
+            // txt_step
             // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.textBox3.Location = new System.Drawing.Point(281, 120);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 25);
-            this.textBox3.TabIndex = 85;
+            this.txt_step.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_step.Location = new System.Drawing.Point(281, 120);
+            this.txt_step.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txt_step.Name = "txt_step";
+            this.txt_step.Size = new System.Drawing.Size(100, 25);
+            this.txt_step.TabIndex = 85;
             // 
-            // textBox2
+            // txt_to
             // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.textBox2.Location = new System.Drawing.Point(281, 72);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 25);
-            this.textBox2.TabIndex = 84;
+            this.txt_to.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_to.Location = new System.Drawing.Point(281, 72);
+            this.txt_to.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txt_to.Name = "txt_to";
+            this.txt_to.Size = new System.Drawing.Size(100, 25);
+            this.txt_to.TabIndex = 84;
             // 
-            // textBox1
+            // txt_from
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.textBox1.Location = new System.Drawing.Point(281, 32);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 25);
-            this.textBox1.TabIndex = 83;
+            this.txt_from.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txt_from.Location = new System.Drawing.Point(281, 32);
+            this.txt_from.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txt_from.Name = "txt_from";
+            this.txt_from.Size = new System.Drawing.Size(100, 25);
+            this.txt_from.TabIndex = 83;
             // 
             // btn_OddAndEven
             // 
@@ -330,11 +332,11 @@ namespace WindowsFormsApp1
             this.ClientSize = new System.Drawing.Size(1037, 544);
             this.Controls.Add(this.btn_SixRan);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.button16);
+            this.Controls.Add(this.btn_clear);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txt_keyin);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.btn_bin);
+            this.Controls.Add(this.btn_binary);
             this.Controls.Add(this.btn_Cc);
             this.Controls.Add(this.btn_LongestName);
             this.Controls.Add(this.lblResult);
@@ -345,9 +347,9 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_step);
+            this.Controls.Add(this.txt_to);
+            this.Controls.Add(this.txt_from);
             this.Controls.Add(this.btn_OddAndEven);
             this.Controls.Add(this.btn_MaxAndMin);
             this.Controls.Add(this.btn_params);
@@ -365,11 +367,11 @@ namespace WindowsFormsApp1
 
         private System.Windows.Forms.Button btn_SixRan;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button btn_clear;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txt_keyin;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btn_bin;
+        private System.Windows.Forms.Button btn_binary;
         private System.Windows.Forms.Button btn_Cc;
         private System.Windows.Forms.Button btn_LongestName;
         private System.Windows.Forms.Label lblResult;
@@ -380,9 +382,9 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_step;
+        private System.Windows.Forms.TextBox txt_to;
+        private System.Windows.Forms.TextBox txt_from;
         private System.Windows.Forms.Button btn_OddAndEven;
         private System.Windows.Forms.Button btn_MaxAndMin;
         private System.Windows.Forms.Button btn_params;
