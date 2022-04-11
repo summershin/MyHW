@@ -224,11 +224,11 @@ namespace WindowsFormsApp1
 
         private void btn_params_Click(object sender, EventArgs e)
         {
-            param(33, 4, 5, 11, 222, 34);
+            param(33, 4, 5, 11, 222, 34, 80);//2222222
         }
         void param(params int[] nums)
         {
-            lblResult.Text = $"33, 4, 5, 11, 222, 34中最大值為{ nums.Max()}";
+            lblResult.Text = $"33, 4, 5, 11, 222, 34, 80中最大值為{ nums.Max()}";
         }
 
 
