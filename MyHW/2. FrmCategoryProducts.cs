@@ -22,14 +22,22 @@ namespace MyHW
             {
 
                 conn = new SqlConnection("Data Source=.;Initial Catalog=Northwind;Integrated Security=True");
-                adapter = new SqlDataAdapter("select categoryname from categories c join products p " +
-                    "on c.categoryID = p.categoryID", conn);
+                adapter = new SqlDataAdapter("select DISTINCT categoryname, productname from categories c join products p " +
+                    "on c.categoryID = p.categoryID", conn); // group by categoryname
                 ds = new DataSet();
                 adapter.Fill(ds);
+                adapter.SelectCommand.CommandText = "select categoryname from categories c join products p " +
+                    "on c.categoryID = p.categoryID";
+                dt = new DataTable();
+                adapter.Fill(dt);
                 int i = 0;
                 while (i < ds.Tables[0].Rows.Count)
                 {
-                    comboBox2.Items.Add(ds.Tables[0].Rows[i]["CategoryName"]);
+                    var sCategoryName = ds.Tables[0].Rows[i]["CategoryName"];
+                    if (!comboBox2.Items.Contains(sCategoryName))
+                    {
+                        comboBox2.Items.Add(ds.Tables[0].Rows[i]["CategoryName"]);
+                    }
                     i++;
                 }
 
@@ -44,6 +52,7 @@ namespace MyHW
         SqlConnection conn;
         SqlDataAdapter adapter;
         DataSet ds;
+        DataTable dt;
         private void _2_Load(object sender, EventArgs e)
         {
 
@@ -110,6 +119,14 @@ namespace MyHW
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            listBox2.Items.Clear();
+            var a = ds.Tables[0].Select($"categoryname = '{comboBox2.SelectedItem}'");
+            foreach (DataRow row in a) {
+                listBox2.Items.Add(row.Field<string>("productname"));
+            } ;
+
+            
+            //listBox2.DataSource = dt.Select($"categoryname = '{comboBox2.SelectedItem}'");
             
         }
     }

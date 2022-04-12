@@ -19,6 +19,7 @@ namespace MyHW
             productsTableAdapter1.Fill(this.dataSet11.Products);
             bindingSource1.DataSource = dataSet11.Products;
             dataGridView1.DataSource = bindingSource1;
+            bindingNavigator1.BindingSource = bindingSource1;
             //label4.DataBindings.Add("Text", bindingSource1, $"{bindingSource1.Position + 1} / {bindingSource1.Count}");
 
         }
@@ -65,6 +66,7 @@ namespace MyHW
             }
 
             productsTableAdapter1.searchprice(dataSet11.Products, a, b);
+            lb_result.Text = $"結果: 單價{a}元~{b}元之間的資料有{bindingSource1.Count}筆資料";
             //this.bindingSource1.DataSource = this.dataSet11.Products;
             //this.dataGridView2.DataSource = this.dataSet11.Products;
 
@@ -73,6 +75,7 @@ namespace MyHW
         private void button2_Click(object sender, EventArgs e)
         {
             productsTableAdapter1.FillBysearchW(dataSet11.Products, txt_productname.Text);
+            lb_result.Text = $"結果: 名稱帶有{txt_productname.Text}的資料有{bindingSource1.Count}筆資料";
         }
     }
 }
