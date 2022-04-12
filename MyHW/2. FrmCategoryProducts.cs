@@ -16,12 +16,37 @@ namespace MyHW
         public _2()
         {
             InitializeComponent();
+
+
+            try
+            {
+
+                conn = new SqlConnection("Data Source=.;Initial Catalog=Northwind;Integrated Security=True");
+                adapter = new SqlDataAdapter("select categoryname from categories c join products p " +
+                    "on c.categoryID = p.categoryID", conn);
+                ds = new DataSet();
+                adapter.Fill(ds);
+                int i = 0;
+                while (i < ds.Tables[0].Rows.Count)
+                {
+                    comboBox2.Items.Add(ds.Tables[0].Rows[i]["CategoryName"]);
+                    i++;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
+        SqlConnection conn;
+        SqlDataAdapter adapter;
+        DataSet ds;
         private void _2_Load(object sender, EventArgs e)
         {
 
-            SqlConnection conn;
             try
             {
                 conn = new SqlConnection("Data Source=.;Initial Catalog=Northwind;Integrated Security=True");
@@ -33,38 +58,27 @@ namespace MyHW
                 {
                     comboBox1.Items.Add(read.GetString(0));
                 }
-                conn.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-            //SqlConnection conn;
-
-            //try
-            //{
-
-            //    conn = new SqlConnection("Data Source=.;Initial Catalog=Northwind;Integrated Security=True");
-            //    SqlDataAdapter adapter = new SqlDataAdapter("select categoryname from categories",conn);
-            //    DataSet ds = new DataSet();
-            //    adapter.Fill(ds);
-            //    comboBox1.DataSource = ds.Tables[0];
-
-
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
 
         }
+        
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             int ch = comboBox1.SelectedIndex + 1;
-            SqlConnection conn;
+
             try
             {
                 conn = new SqlConnection("Data Source=.;Initial Catalog=Northwind;Integrated Security=True");
@@ -79,13 +93,24 @@ namespace MyHW
                     listBox1.Items.Add(read.GetString(0).ToString());
                 }
 
-                conn.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
 
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
