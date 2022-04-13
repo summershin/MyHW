@@ -75,11 +75,11 @@
     <Compile Include="3. FrmProduct.Designer.cs">
       <DependentUpon>3. FrmProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm_DataSet  結構.cs">
+    <Compile Include="4. Frm_DataSet  結構.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm_DataSet  結構.Designer.cs">
-      <DependentUpon>Frm_DataSet  結構.cs</DependentUpon>
+    <Compile Include="4. Frm_DataSet  結構.Designer.cs">
+      <DependentUpon>4. Frm_DataSet  結構.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,8 +92,8 @@
     <EmbeddedResource Include="3. FrmProduct.resx">
       <DependentUpon>3. FrmProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm_DataSet  結構.resx">
-      <DependentUpon>Frm_DataSet  結構.cs</DependentUpon>
+    <EmbeddedResource Include="4. Frm_DataSet  結構.resx">
+      <DependentUpon>4. Frm_DataSet  結構.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

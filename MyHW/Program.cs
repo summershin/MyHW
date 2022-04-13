@@ -18,7 +18,7 @@ namespace MyHW
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmProduct());
+            Application.Run(new Frm_DataSet__結構());
         }
     }
 }
