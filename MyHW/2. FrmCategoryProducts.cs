@@ -22,12 +22,12 @@ namespace MyHW
             {
 
                 conn = new SqlConnection("Data Source=.;Initial Catalog=Northwind;Integrated Security=True");
-                adapter = new SqlDataAdapter("select DISTINCT categoryname, productname from categories c join products p " +
+                adapter = new SqlDataAdapter("select categoryname, productname from categories c join products p " +
                     "on c.categoryID = p.categoryID", conn); // group by categoryname
                 ds = new DataSet();
                 adapter.Fill(ds);
                 adapter.SelectCommand.CommandText = "select categoryname from categories c join products p " +
-                    "on c.categoryID = p.categoryID";
+                    "on c.categoryID = p.categoryID";                
                 dt = new DataTable();
                 adapter.Fill(dt);
                 int i = 0;
