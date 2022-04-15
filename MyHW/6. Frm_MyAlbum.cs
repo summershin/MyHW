@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -33,12 +34,9 @@ namespace MyHW
 
         private void C_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
             LinkLabel lab = sender as LinkLabel;
             photoTableAdapter1.FillByCityId(myAlbumDataSet1.Photo, (int)lab.Tag);
             dataGridView1.DataSource = myAlbumDataSet1.Photo;
-            
-
         }
 
         private void btn_ShowPhoto_Click(object sender, EventArgs e)
@@ -57,6 +55,7 @@ namespace MyHW
         {
             cityTableAdapter1.Update(myAlbumDataSet1.City);
         }
+
 
         private void btn_SavePhoto_Click(object sender, EventArgs e)
         {
