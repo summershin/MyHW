@@ -48,7 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -116,6 +118,18 @@
     <Compile Include="6. Frm_MyAlbum.Designer.cs">
       <DependentUpon>6. Frm_MyAlbum.cs</DependentUpon>
     </Compile>
+    <Compile Include="7. Frm_Custom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="7. Frm_Custom.Designer.cs">
+      <DependentUpon>7. Frm_Custom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="7. Frm_Logon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="7. Frm_Logon.Designer.cs">
+      <DependentUpon>7. Frm_Logon.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyAlbumDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -140,6 +154,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="6. Frm_MyAlbum.resx">
       <DependentUpon>6. Frm_MyAlbum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="7. Frm_Custom.resx">
+      <DependentUpon>7. Frm_Custom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="7. Frm_Logon.resx">
+      <DependentUpon>7. Frm_Logon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
