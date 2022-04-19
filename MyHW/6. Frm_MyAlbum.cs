@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,49 +18,128 @@ namespace MyHW
         {
             InitializeComponent();
 
-            cityTableAdapter1.Fill(myAlbumDataSet1.City);
-            for(int i = 0; i < myAlbumDataSet1.City.Rows.Count; i++)
-            {
-                LinkLabel c = new LinkLabel();
-                splitContainer1.Panel1.Controls.Add(c);
-                c.Left = 5;
-                c.Top = 5 + 30 * i;
-                c.Text = myAlbumDataSet1.City[i][1].ToString();
-                c.Tag = myAlbumDataSet1.City[i][0];
-                c.LinkClicked += C_LinkClicked;
+            categoryTableAdapter1.Fill(myAlbumDS1.Category);
+            bindingSource1.DataSource = myAlbumDS1.Category;
+            bindingNavigator1.BindingSource = bindingSource1;
+            dataGridView1.DataSource = bindingSource1;
+            textBox1.DataBindings.Add("Text", bindingSource1, "CategoryID");
+            textBox2.DataBindings.Add("Text", bindingSource1, "Category");
 
+            photoTableAdapter1.Fill(myAlbumDS1.Photo);
+            bindingSource2.DataSource = myAlbumDS1.Photo;
+            bindingNavigator2.BindingSource = bindingSource2;
+            dataGridView2.DataSource = bindingSource2;
+            textBox4.DataBindings.Add("Text", bindingSource2, "PhotoID");
+            textBox3.DataBindings.Add("Text", bindingSource2, "CategoryID");
+            textBox5.DataBindings.Add("Text", bindingSource2, "Description");
+            textBox6.DataBindings.Add("Text", bindingSource2, "PhotoName");
+            dateTimePicker1.DataBindings.Add("Value", bindingSource2, "Date");
+            try
+            {
+                pictureBox1.DataBindings.Add("Image", bindingSource2, "Photo", true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                pictureBox1.Image = pictureBox1.ErrorImage;
+            }
+
+            //flowLayoutPanel1.DataBindings.Add("Image", bindingSource2, "Photo");
+            //flowLayoutPanel2.DataBindings.Add("Image", bindingSource2, "Photo");
+
+            DataTable dt = myAlbumDS1.Category;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                LinkLabel lk = new LinkLabel();
+                lk.Text = dt.Rows[i]["Category"].ToString();
+                lk.Left = 5;
+                lk.Top = 25 * i + 5;
+                lk.Tag = dt.Rows[i]["CategoryID"];
+                splitContainer1.Panel1.Controls.Add(lk);
+                lk.Click += Lk_Click;
+                comboBox1.Items.Add(dt.Rows[i]["Category"]);
             }
 
         }
 
-        private void C_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void Lk_Click(object sender, EventArgs e)
         {
-            LinkLabel lab = sender as LinkLabel;
-            photoTableAdapter1.FillByCityId(myAlbumDataSet1.Photo, (int)lab.Tag);
-            dataGridView1.DataSource = myAlbumDataSet1.Photo;
+            MyAlbumDS dt = new MyAlbumDS();
+            photoTableAdapter1.FillByCategoryID(dt.Photo, (int)((LinkLabel)sender).Tag);
+            flowLayoutPanel1.Controls.Clear();
+            for (int i = 0; i < dt.Photo.Rows.Count; i++)
+            {
+                byte[] byt = (byte[])dt.Photo.Rows[i]["Photo"];
+                System.IO.MemoryStream ms = new System.IO.MemoryStream(byt);
+                PictureBox pb = new PictureBox();
+                pb.SizeMode=PictureBoxSizeMode.StretchImage;
+                pb.Padding = new Padding(3);
+                pb.BorderStyle = BorderStyle.FixedSingle;
+                pb.MouseEnter += Pb_MouseEnter;
+                pb.MouseLeave += Pb_MouseLeave;
+                pb.Size = new Size(150, 100);
+                pb.Image = Image.FromStream(ms);
+                flowLayoutPanel1.Controls.Add(pb);
+            }
         }
 
-        private void btn_ShowPhoto_Click(object sender, EventArgs e)
+        private void Pb_MouseLeave(object sender, EventArgs e)
         {
-            photoTableAdapter1.Fill(myAlbumDataSet1.Photo);
-            dataGridView1.DataSource = myAlbumDataSet1.Photo;
+            ((PictureBox)sender).BackColor = Color.White;
         }
 
-        private void btn_ShowCity_Click(object sender, EventArgs e)
+        private void Pb_MouseEnter(object sender, EventArgs e)
         {
-            cityTableAdapter1.Fill(myAlbumDataSet1.City);
-            dataGridView1.DataSource = myAlbumDataSet1.City;
+            ((PictureBox)sender).BackColor = Color.Red;
         }
 
-        private void btn_SaveCity_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            cityTableAdapter1.Update(myAlbumDataSet1.City);
+            if(folderBrowserDialog1.ShowDialog()==DialogResult.OK)
+            {
+                string folder =  folderBrowserDialog1.SelectedPath;
+
+            }
         }
 
-
-        private void btn_SavePhoto_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            photoTableAdapter1.Update(myAlbumDataSet1.Photo);
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+            }
+            
+        }
+
+        private void 儲存SToolStripButton_Click(object sender, EventArgs e)
+        {
+            photoTableAdapter1.Update(myAlbumDS1.Photo);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            categoryTableAdapter1.Update(myAlbumDS1.Category);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MyAlbumDS dt = new MyAlbumDS();
+            photoTableAdapter1.FillBycombox(dt.Photo, comboBox1.SelectedItem.ToString());
+            flowLayoutPanel2.Controls.Clear();
+            for(int i = 0; i < dt.Photo.Rows.Count; i++)
+            {
+                byte[] byt = (byte[])dt.Photo.Rows[i]["Photo"];
+                System.IO.MemoryStream ms = new System.IO.MemoryStream(byt);
+                PictureBox pb = new PictureBox();
+                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                pb.Padding = new Padding(3);
+                pb.BorderStyle = BorderStyle.FixedSingle;
+                pb.MouseEnter += Pb_MouseEnter;
+                pb.MouseLeave += Pb_MouseLeave;
+                pb.Size = new Size(200, 150);
+                pb.Image = Image.FromStream(ms);
+                flowLayoutPanel2.Controls.Add(pb);
+            }
         }
     }
 }
